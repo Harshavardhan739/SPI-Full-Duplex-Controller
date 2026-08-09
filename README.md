@@ -177,16 +177,19 @@
 
 🎛️ SPI Top Module
 
-> The SPI Top Module integrates the SPI Master and SPI Slave into a complete full-duplex communication system.
-
-    The internal connections include:
-    • Master MOSI  ───────────► Slave MOSI
-    • Master MISO  ◄─────────── Slave MISO
-    • Master SCLK  ───────────► Slave SCLK
-    • Master CS    ───────────► Slave CS
-
-> This integration enables simultaneous transmission and reception between the Master and Slave.
-
+    Integrates:
+    • SPI Master
+    • SPI Slave
+    • Clock Divider
+    • TX Shift Register
+    • RX Shift Register
+    • Bit Counter
+    • FSM Control Logic
+    The Master and Slave are interconnected through the SPI communication signals:
+    • MOSI
+    • MISO
+    • SCLK
+    • CS
 ---
 
 🏗️ Design Methodology
