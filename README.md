@@ -185,7 +185,9 @@
     • RX Shift Register
     • Bit Counter
     • FSM Control Logic
+    
     The Master and Slave are interconnected through the SPI communication signals:
+    
     • MOSI
     • MISO
     • SCLK
