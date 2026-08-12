@@ -1,600 +1,339 @@
-
----
-
 🚀 SPI Full-Duplex Controller Design and Verification using Verilog HDL
 
-> A complete SPI (Serial Peripheral Interface) Full-Duplex Controller designed in Verilog HDL with separate Master and Slave controllers and functional verification using ModelSim Intel FPGA Starter Edition.
-
-
-
+> A parameterized SPI (Serial Peripheral Interface) Full-Duplex Controller designed in Verilog HDL with Master-Slave communication and functional verification using ModelSim Intel FPGA Starter Edition.
 
 ---
 
 📖 Overview
 
-> This project presents the RTL design and functional verification of a complete SPI Full-Duplex Controller using Verilog HDL. The design consists of an SPI Master, SPI Slave, Clock Divider, Transmit and Receive Shift Registers, Bit Counter, and FSM-based control logic.
+> This project presents the RTL design and functional verification of an SPI Full-Duplex Controller using Verilog HDL.
 
+> The design consists of an SPI Master, SPI Slave, Clock Divider, TX/RX Shift Registers, Bit Counter, and FSM-based control logic.
 
+> The SPI Master generates the serial clock and chip-select signals, while the Master and Slave simultaneously transmit and receive data through the MOSI and MISO signals.
 
-> The SPI Master generates the serial clock and controls the chip-select signal, while the SPI Slave responds to the generated clock and exchanges data simultaneously through MOSI and MISO.
-
-
-
-> Functional verification was performed using ModelSim Intel FPGA Starter Edition, demonstrating simultaneous serial transmission and reception between the SPI Master and SPI Slave.
-
-
-
-> The implementation validates SPI clock generation, full-duplex data transfer, shift-register operation, bit counting, FSM control, chip-select control, and received-data integrity.
-
-
-
+> Functional verification was performed using ModelSim Intel FPGA Starter Edition to validate SPI clock generation, FSM operation, serial data transmission, serial data reception, and end-to-end data integrity.
 
 ---
 
 🎯 Project Objective
 
-> The objective of this project is to design, implement, and verify a parameterized SPI Full-Duplex Controller using Verilog HDL.
+> The objective of this project is to design, implement, and verify a modular and parameterized SPI Full-Duplex Controller using Verilog HDL.
 
+> The project demonstrates synchronous serial communication between an SPI Master and Slave while validating:
 
-
-> The project demonstrates synchronous serial communication between an SPI Master and SPI Slave by integrating clock generation, transmit and receive shift registers, bit counting, FSM-based control, and complete end-to-end functional verification.
-
-
-
+    • SPI clock generation
+    • Chip-select control
+    • Full-duplex data transfer
+    • Serial data shifting
+    • Data reception
+    • FSM-based control
+    • Bit counting
+    • End-to-end communication
 
 ---
 
 ✨ Features
 
-SPI Master Controller
-
-SPI Slave Controller
-
-Full-Duplex Communication
-
-MOSI and MISO Data Transfer
-
-Master-Generated SPI Clock
-
-Chip-Select (CS) Control
-
-Parameterized Data Width
-
-Configurable System Clock Frequency
-
-Configurable SPI Clock Frequency
-
-MSB-First Data Transfer
-
-TX Shift Register
-
-RX Shift Register
-
-Bit Counter
-
-FSM-Based Control Logic
-
-Separate Master and Slave RTL Modules
-
-Modular RTL Architecture
-
-Individual Module Verification
-
-Master-Slave Integration
-
-End-to-End Full-Duplex Verification
-
-ModelSim Waveform Verification
-
-RTL/Dataflow Verification
-
-
+    • Parameterized SPI Clock Divider
+    • Full-Duplex Communication
+    • Master and Slave Architecture
+    • Configurable Data Width
+    • Configurable CPOL
+    • SPI Mode 0 Operation
+    • Serial TX/RX Shift Registers
+    • Bit Counter
+    • FSM-Based Control Logic
+    • Modular RTL Design
+    • Dedicated Master and Slave Testbenches
+    • Top-Level System Integration
+    • ModelSim Waveform Verification
+    • RTL/Dataflow Verification
 
 ---
 
 📁 Project Structure
 
-SPI-Full-Duplex-Controller/
-│
-├── rtl/
-│   ├── spi_master.v
-│   ├── spi_slave.v
-│   ├── clock_divider.v
-│   ├── tx_shift_register.v
-│   ├── rx_shift_register.v
-│   ├── bit_counter.v
-│   └── spi_fsm.v
-│
-├── tb/
-│   ├── spi_master_tb.v
-│   ├── spi_slave_tb.v
-│   └── spi_top_tb.v
-│
-├── docs/
-│   ├── spi_block_diagram.png
-│   ├── spi_master_fsm.png
-│   ├── spi_slave_fsm.png
-│   ├── spi_master_dataflow.png
-│   └── spi_slave_dataflow.png
-│
-├── waveforms/
-│   ├── spi_master_waveform.png
-│   ├── spi_slave_waveform.png
-│   └── spi_full_duplex_waveform.png
-│
-└── README.md
-
+    📂 SPI-Full-Duplex-Controller/  
+     📂 rtl/ (Design Source Files)  
+       📄 spi_master.v  
+       📄 spi_slave.v  
+       📄 spi_top.v  
+       📄 clock_divider.v  
+       📄 tx_shift_register.v  
+       📄 rx_shift_register.v  
+       📄 bit_counter.v  
+       📄 spi_fsm.v  
+    📂 tb/ (Testbench Verification Files)  
+       📄 spi_master_tb.v  
+       📄 spi_slave_tb.v  
+       📄 spi_top_tb.v  
+    📂 docs/ (Design Documentation and Diagrams) 
+       🖼️ spi_block_diagram.png
+       🖼️ spi_master_fsm.png
+       🖼️ spi_slave_fsm.png
+       🖼️ spi_master_dataflow.png  
+       🖼️ spi_slave_dataflow.png  
+    📂 waveforms/ (Simulation Waveform Logs)   
+       🖼️ spi_master_waveform.png  
+       🖼️ spi_slave_waveform.png
+       🖼️ spi_full_duplex_waveform.png
+    📄 README.md
 
 ---
 
 ⚙️ Module Description
 
-🧠 SPI Master Controller
-
-The SPI Master controls the SPI communication and generates the serial clock required for data transfer.
-
-Responsibilities
-
-Generates SPI clock (SCLK)
-
-Controls Chip Select (CS)
-
-Transmits data through MOSI
-
-Receives data through MISO
-
-Controls TX/RX shift operations
-
-Maintains the bit-transfer count
-
-Generates busy and done status signals
-
-Controls the overall SPI transfer using FSM logic
-
-
-
----
-
-📤 Master TX Shift Register
-
-The Master TX Shift Register stores the parallel transmit data and shifts the data serially toward the MOSI output.
-
-Features
-
-Parameterized data width
-
-MSB-first transmission
-
-Controlled shift operation
-
-Parallel data loading
-
-
-
----
-
-📥 Master RX Shift Register
-
-The Master RX Shift Register samples serial data received through MISO and reconstructs it into parallel data.
-
-Features
-
-Serial data sampling
-
-Shift-register based reception
-
-Parameterized data width
-
-Parallel received-data output
-
-
-
----
-
-🧠 SPI Slave Controller
-
-The SPI Slave responds to the Master-generated clock and participates in full-duplex communication.
-
-Responsibilities
-
-Responds to CS
-
-Receives data through MOSI
-
-Transmits data through MISO
-
-Performs simultaneous TX/RX shifting
-
-Counts transferred bits
-
-Generates received parallel data
-
-
-
----
-
-📤 Slave TX Shift Register
-
-The Slave TX Shift Register stores the slave transmit data and shifts it toward the MISO output during the SPI transfer.
-
-
----
-
-📥 Slave RX Shift Register
-
-The Slave RX Shift Register samples incoming MOSI data and reconstructs the received parallel data.
-
-
----
-
 🕐 Clock Divider
 
-The Clock Divider generates the SPI serial clock from the system clock.
+> The Clock Divider generates the SPI serial clock timing from the system clock.
 
-Parameters
+    Responsibilities:
+    • Divides the system clock to generate the required SPI clock
+    • Provides controlled timing for SPI data transfer
+    • Supports parameterized system-clock and SPI-clock frequencies
 
-System Clock Frequency
+---
 
-SPI Clock Frequency
+📤 SPI Master
 
+> The SPI Master controls the SPI communication and initiates data transfers.
 
-The generated clock is supplied to the SPI Master/Slave communication interface.
+    Responsibilities:
+    • Generates SCLK
+    • Controls active-low Chip Select (CS)
+    • Transmits data through MOSI
+    • Receives data through MISO
+    • Controls serial data shifting
+    • Maintains the transfer bit count
+    • Generates transfer completion indication
 
+    FSM Control
+
+    The Master control logic uses FSM-based sequencing for:
+    • IDLE
+    • LOAD
+    • TRANSFER
+    • FINISH
+
+---
+
+📥 SPI Slave
+
+> The SPI Slave responds to the Master during an active SPI transaction.
+
+    Responsibilities:
+    • Monitors Chip Select
+    • Receives SCLK from the Master
+    • Receives serial data through MOSI
+    • Transmits serial data through MISO
+    • Performs simultaneous transmit and receive operations
+    • Reconstructs received parallel data
+    • Maintains transfer bit count
+
+    FSM Control
+
+    The Slave control logic manages:
+    • IDLE
+    • RECEIVE/TRANSMIT
+    • DONE
+
+---
+
+🔄 TX Shift Register
+
+> The TX Shift Register stores parallel transmit data and shifts one bit at a time during SPI communication.
+
+    Responsibilities:
+    • Parallel data loading
+    • Serial bit shifting
+    • MSB-first transmission
+    • Controlled shifting according to SPI timing
+
+---
+
+🔄 RX Shift Register
+
+> The RX Shift Register samples incoming serial data and reconstructs the received parallel data.
+
+    Responsibilities:
+    • Serial data sampling
+    • Bit shifting
+    • Parallel data reconstruction
+    • MSB-first reception
 
 ---
 
 🔢 Bit Counter
 
-The Bit Counter tracks the number of bits transferred during an SPI transaction.
+> The Bit Counter tracks the number of transferred bits during an SPI transaction.
 
-Functions
-
-Counts transferred bits
-
-Detects completion of a data frame
-
-Supports parameterized data width
-
-Provides transfer-completion information to the control logic
-
-
+    Responsibilities:
+    • Counts transmitted/received bits
+    • Detects completion of the SPI frame
+    • Synchronizes transfer progress with the control FSM
 
 ---
 
-🎛️ SPI FSM
+🎛️ SPI Top Module
 
-The SPI Master control logic uses an FSM to manage the SPI transaction.
-
-FSM States
-
-IDLE
-
-LOAD
-
-TRANSFER
-
-FINISH
-
-
-State Functions
-
-IDLE
-
-> Waits for a new transfer request.
-
-
-
-LOAD
-
-> Loads the transmit data and initializes the transfer.
-
-
-
-TRANSFER
-
-> Performs serial data transmission and reception.
-
-
-
-FINISH
-
-> Completes the transfer and asserts the appropriate completion status.
-
-
-
-
----
-
-🔄 SPI Full-Duplex Communication
-
-SPI supports simultaneous transmission and reception.
-
-SPI MASTER
-          ┌───────────────┐
-          │               │
-          │   TX Data     │
-          │      │        │
-          │      ▼        │
-          │ TX Shift Reg  │
-          │      │        │
-          └──────┼────────┘
-                 │
-                MOSI
-                 │
-                 ▼
-          ┌───────────────┐
-          │   SPI SLAVE   │
-          │               │
-          │ RX Shift Reg  │
-          │      │        │
-          │      ▼        │
-          │   RX Data     │
-          └───────────────┘
-
-
-          ┌───────────────┐
-          │   SPI SLAVE   │
-          │               │
-          │ TX Shift Reg  │
-          │      │        │
-          └──────┼────────┘
-                 │
-                MISO
-                 │
-                 ▼
-          ┌───────────────┐
-          │   SPI MASTER  │
-          │               │
-          │ RX Shift Reg  │
-          │      │        │
-          │      ▼        │
-          │   RX Data     │
-          └───────────────┘
-
-       SCLK  ─────────────►
-       CS    ─────────────►
-
-> During an SPI transaction, the Master transmits data through MOSI while simultaneously receiving data through MISO, providing full-duplex communication.
-
-
-
-
+    Integrates:
+    • SPI Master
+    • SPI Slave
+    • Clock Divider
+    • TX Shift Register
+    • RX Shift Register
+    • Bit Counter
+    • FSM Control Logic
+    
+    The Master and Slave are interconnected through the SPI communication signals:
+    
+    • MOSI
+    • MISO
+    • SCLK
+    • CS
 ---
 
 🏗️ Design Methodology
 
-The SPI Full-Duplex Controller follows a modular and parameterized RTL design methodology.
+> The SPI Full-Duplex Controller follows a modular and parameterized RTL design methodology.
 
-1. Parameterization of SPI configuration
-
-
-2. System-clock to SPI-clock generation
-
-
-3. Transmit shift-register implementation
-
-
-4. Receive shift-register implementation
-
-
-5. Bit-counter implementation
-
-
-6. FSM-based SPI control
-
-
-7. SPI Master implementation
-
-
-8. SPI Slave implementation
-
-
-9. Master-Slave integration
-
-
-10. Full-duplex communication verification
-
-
-11. Functional simulation using ModelSim
-
-
-
+    1. Parameterization of SPI data width and clock frequency
+    2. SPI clock generation using a clock divider
+    3. Parallel transmit-data loading
+    4. Serial data transmission
+    5. Serial data reception
+    6. Shift-register based data handling
+    7. Bit counting
+    8. FSM-based protocol control
+    9. Master-Slave top-level integration
+    10. Functional verification using ModelSim
 
 ---
 
 💻 Simulation Environment
 
-HDL Language
+    • HDL Language
+        Verilog HDL
 
-Verilog HDL
+    • Simulation Tool
+        ModelSim Intel FPGA Starter Edition 10.5b
 
-Simulation Tool
+    • Code Editor
+        Visual Studio Code
 
-ModelSim Intel FPGA Starter Edition 10.5b
-
-Code Editor
-
-Visual Studio Code
-
-Version Control
-
-GitHub
-
+    • Version Control
+        GitHub
 
 ---
 
 ✅ Verification Status
 
-All major modules were verified individually before performing complete Master-Slave integration.
+> The design was verified at both module and system levels.
 
-Module	Status
+          Module / Function           Status
 
-Clock Divider	✅ Verified
-Bit Counter	✅ Verified
-TX Shift Register	✅ Verified
-RX Shift Register	✅ Verified
-SPI FSM	✅ Verified
-SPI Master	✅ Verified
-SPI Slave	✅ Verified
-Master-Slave Integration	✅ Verified
-Full-Duplex Communication	✅ Passed
-
-
+    Clock Divider                  ✅ Verified
+    SPI Master                     ✅ Verified
+    SPI Slave                      ✅ Verified
+    TX Shift Register              ✅ Verified
+    RX Shift Register              ✅ Verified
+    Bit Counter                    ✅ Verified
+    FSM Control                    ✅ Verified
+    Top-Level Integration          ✅ Verified
+    Full-Duplex Communication      ✅ Passed
 
 ---
 
 🧪 Functional Verification
 
-The following functionality has been verified:
+> The following functionality was verified through simulation:
 
-SPI Clock Generation
-
-Chip-Select Control
-
-Master Transmission
-
-Master Reception
-
-Slave Transmission
-
-Slave Reception
-
-MOSI Data Transfer
-
-MISO Data Transfer
-
-Full-Duplex Communication
-
-TX Shift Operation
-
-RX Shift Operation
-
-Bit Counting
-
-FSM State Transitions
-
-Busy Signal Operation
-
-Done Signal Assertion
-
-Transfer Completion
-
-Data Integrity
-
-Master-Slave Communication
-
-End-to-End SPI Communication
-
-
+    • SPI clock generation
+    • Chip Select assertion and de-assertion
+    • Master transmission
+    • Master reception
+    • Slave transmission
+    • Slave reception
+    • Full-Duplex data transfer
+    • TX shift-register operation
+    • RX shift-register operation
+    • Bit-counter operation
+    • FSM state transitions
+    • Busy signal operation
+    • Done signal operation
+    • Data integrity
+    • End-to-end Master-Slave communication
 
 ---
 
 🧪 Test Case
 
-Test Case 1 — Full-Duplex Transfer
+    Input Data & Configuration:
+    • Master TX Data : 8'hA5 (10100101)
+    • Slave TX Data  : 8'h3C (00111100)
+    • Data Width     : 8 bits
+    • SPI Mode       : Mode 0
+    • CPOL           : 0
 
-Master TX Data : 8'hA5
-Slave TX Data  : 8'h3C
+    Expected Full-Duplex Result:
+    • Master RX      : 00111100 = 8'h3C
+    • Slave RX       : 10100101 = 8'hA5
 
-Configuration:
-    Data Width      : 8-bit
-    System Clock    : 100 MHz
-    SPI Clock       : 1 MHz
-    Bit Order       : MSB First
-
-Expected Result
-
-Master RX Data : 8'h3C
-Slave RX Data  : 8'hA5
-
-> Since SPI is a full-duplex protocol, the Master and Slave transmit and receive data simultaneously during the same clock transaction.
-
-
-
+> The received data should correspond to the data transmitted by the opposite device, demonstrating simultaneous SPI transmission and reception.
 
 ---
 
 🎉 Simulation Results
 
-Successful SPI clock generation
+> The simulation results demonstrate:
 
-Successful Chip-Select control
-
-Successful Master transmission
-
-Successful Slave transmission
-
-Successful Master reception
-
-Successful Slave reception
-
-Correct MOSI communication
-
-Correct MISO communication
-
-Correct TX/RX shifting
-
-Correct bit counting
-
-Correct FSM transitions
-
-Successful full-duplex data transfer
-
-Correct received-data values
-
-Successful Master-Slave communication
-
-No functional errors observed during the verified test cases
-
-
+    • Successful SPI Master-Slave communication
+    • Correct SPI clock generation
+    • Correct Chip Select operation
+    • Simultaneous transmission and reception
+    • Correct serial data shifting
+    • Correct bit counting
+    • Correct FSM state transitions
+    • Correct received data reconstruction
+    • Successful full-duplex data exchange
+    • Correct transfer completion indication
+    • Successful end-to-end system integration
 
 ---
 
 📊 Results
 
-> The SPI Full-Duplex Controller successfully established synchronous serial communication between the SPI Master and SPI Slave using Verilog HDL. The simulation verified correct SPI clock generation, chip-select control, simultaneous transmission and reception, shift-register operation, bit counting, FSM control, and received-data integrity.
+> The SPI Full-Duplex Controller successfully demonstrates synchronous serial communication between an SPI Master and Slave.
 
+> The simulation verifies SPI clock generation, Chip Select control, serial data transmission, serial data reception, shift-register operation, bit counting, FSM-based control, and simultaneous full-duplex communication.
 
+    For the test case:
+    • Master TX = 8'hA5
+    • Slave TX  = 8'h3C
 
-> The final Master-Slave integration demonstrated successful full-duplex communication, where the Master and Slave exchanged data simultaneously through MOSI and MISO.
+    • Master RX = 8'h3C
+    • Slave RX  = 8'hA5
 
-
-
+> This confirms bidirectional data exchange during the same SPI transaction.
 
 ---
 
 🏗️ SPI Block Diagram
 
-
-
+![SPI Block Diagram](docs/spi_block_diagram.png)
 
 ---
 
 🔄 SPI Master FSM
 
-
-
+![SPI Master FSM](docs/spi_master_fsm.png)
 
 ---
 
 🔄 SPI Slave FSM
 
-
-
-
----
-
-🔧 SPI Master RTL Dataflow
-
-
-
-
----
-
-🔧 SPI Slave RTL Dataflow
-
-
-
+![SPI Slave FSM](docs/spi_slave_fsm.png)
 
 ---
 
@@ -602,141 +341,98 @@ No functional errors observed during the verified test cases
 
 📈 SPI Master Waveform
 
-
-
+![SPI Master Waveform](waveforms/spi_master_waveform.png)
 
 ---
 
 📈 SPI Slave Waveform
 
-
-
+![SPI Slave Waveform](waveforms/spi_slave_waveform.png)
 
 ---
 
-📈 SPI Full-Duplex Waveform
+📈 SPI Full-Duplex Top-Level Waveform
 
+![SPI Full Duplex Waveform](waveforms/spi_full_duplex_waveform.png)
 
+---
 
+🔧 SPI Master RTL Dataflow
+
+![SPI Master Dataflow](docs/spi_master_dataflow.png)
+
+---
+
+🔧 SPI Slave RTL Dataflow
+
+![SPI Slave Dataflow](docs/spi_slave_dataflow.png)
 
 ---
 
 🛠️ Skills Demonstrated
 
-Verilog HDL
-
-RTL Design
-
-Parameterized RTL Design
-
-Finite State Machine (FSM)
-
-SPI Communication Protocol
-
-Full-Duplex Communication
-
-Serial Communication
-
-Shift Register Design
-
-Clock Divider Design
-
-Bit Counter Design
-
-Modular Hardware Design
-
-Testbench Development
-
-Functional Verification
-
-Waveform Analysis
-
-ModelSim
-
-GitHub
-
-
+    • Verilog HDL
+    • RTL Design
+    • Parameterized RTL Design
+    • Finite State Machine (FSM)
+    • SPI Communication Protocol
+    • Full-Duplex Architecture
+    • Shift Register Design
+    • Clock Divider Design
+    • Functional Verification
+    • Testbench Development
+    • Waveform Analysis
+    • RTL/Dataflow Analysis
+    • Modular Hardware Design
+    • ModelSim
+    • GitHub
 
 ---
 
 🚀 Future Enhancements
 
-Support for SPI Modes 0–3
-
-Configurable CPOL and CPHA
-
-LSB-First Data Transfer
-
-Multiple Slave Support
-
-Programmable Clock Polarity and Phase
-
-FIFO Buffer Integration
-
-FPGA Hardware Validation
-
-APB/AXI Interface Integration
-
-Interrupt-Based Transfer Completion
-
-
+    • Support for additional SPI modes
+    • Multi-Slave SPI support
+    • Dual/Quad SPI support
+    • FIFO Buffer Integration
+    • APB/AHB Register Interface
+    • FPGA Hardware Validation
+    • Configurable MSB/LSB-First operation
+    • Enhanced error/status reporting
 
 ---
 
 📚 Learning Outcomes
 
-Through this project, the following concepts were implemented and verified:
+> Through this project, the following concepts were implemented and verified:
 
-RTL Design using Verilog HDL
-
-Parameterized RTL Design
-
-SPI Communication Protocol
-
-Full-Duplex Serial Communication
-
-SPI Master Design
-
-SPI Slave Design
-
-Clock Divider Design
-
-Shift Register Design
-
-Bit Counter Design
-
-FSM Design
-
-Modular Hardware Design
-
-Testbench Development
-
-Functional Simulation
-
-Waveform Analysis
-
-Master-Slave Integration
-
-Data Integrity Verification
-
-RTL/Dataflow Verification
-
-
+    • RTL Design using Verilog HDL
+    • Parameterized RTL Design
+    • FSM-Based Hardware Design
+    • SPI Communication Protocol
+    • SPI Clock Generation
+    • Full-Duplex Serial Communication
+    • Shift Register Design
+    • Bit Counter Design
+    • Master-Slave Architecture
+    • Modular Hardware Design
+    • Functional Simulation
+    • Testbench Development
+    • Digital System Integration
+    • Waveform Analysis
+    • RTL/Dataflow Verification
+    • ModelSim-Based Verification
 
 ---
 
 👨‍💻 Author
 
-Harshavardhan Akula
+A. Harshavardhan  
 
-GitHub Profile: [GitHub Profile](https://github.com/Harshavardhan739?utm_source=chatgpt.com)
-
+GitHub Profile: https://github.com/Harshavardhan739
 
 ---
 
 📄 License
 
 This project is intended for educational, academic, and learning purposes.
-
-
----
