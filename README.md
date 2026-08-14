@@ -72,8 +72,6 @@
        🖼️ spi_block_diagram.png
        🖼️ spi_master_fsm.png
        🖼️ spi_slave_fsm.png
-       🖼️ spi_master_dataflow.png  
-       🖼️ spi_slave_dataflow.png  
     📂 waveforms/ (Simulation Waveform Logs)   
        🖼️ spi_master_waveform.png  
        🖼️ spi_slave_waveform.png
@@ -354,18 +352,6 @@
 📈 SPI Full-Duplex Top-Level Waveform
 
 ![SPI Full Duplex Waveform](waveforms/spi_full_duplex_waveform.png)
-
----
-
-🔧 SPI Master RTL Dataflow
-
-![SPI Master Dataflow](docs/spi_master_dataflow.png)
-
----
-
-🔧 SPI Slave RTL Dataflow
-
-![SPI Slave Dataflow](docs/spi_slave_dataflow.png)
 
 ---
 
