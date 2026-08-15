@@ -48,7 +48,7 @@
     • Dedicated Master and Slave Testbenches
     • Top-Level System Integration
     • ModelSim Waveform Verification
-    • RTL/Dataflow Verification
+    • RTL Verification
 
 ---
 
@@ -128,12 +128,9 @@
     • Reconstructs received parallel data
     • Maintains transfer bit count
 
-    FSM Control
-
-    The Slave control logic manages:
-    • IDLE
-    • RECEIVE/TRANSMIT
-    • DONE
+> The SPI Slave uses CS- and SCLK-controlled sequential logic
+> To perform transmit and receive operations during an active
+> SPI transaction, rather than using a separate FSM module.
 
 ---
 
@@ -361,7 +358,7 @@
     • Functional Verification
     • Testbench Development
     • Waveform Analysis
-    • RTL/Dataflow Analysis
+    • RTL Analysis
     • Modular Hardware Design
     • ModelSim
     • GitHub
@@ -399,7 +396,7 @@
     • Testbench Development
     • Digital System Integration
     • Waveform Analysis
-    • RTL/Dataflow Verification
+    • RTL Verification
     • ModelSim-Based Verification
 
 ---
