@@ -48,7 +48,7 @@
     • Dedicated Master and Slave Testbenches
     • Top-Level System Integration
     • ModelSim Waveform Verification
-    • RTL/Dataflow Verification
+    • RTL Verification
 
 ---
 
@@ -71,9 +71,8 @@
     📂 docs/ (Design Documentation and Diagrams) 
        🖼️ spi_block_diagram.png
        🖼️ spi_master_fsm.png
-       🖼️ spi_slave_fsm.png
-       🖼️ spi_master_dataflow.png  
-       🖼️ spi_slave_dataflow.png  
+       🖼️ spi_master_dataflow.png
+       🖼️ spi_slave_dataflow.png
     📂 waveforms/ (Simulation Waveform Logs)   
        🖼️ spi_master_waveform.png  
        🖼️ spi_slave_waveform.png
@@ -131,12 +130,7 @@
     • Reconstructs received parallel data
     • Maintains transfer bit count
 
-    FSM Control
-
-    The Slave control logic manages:
-    • IDLE
-    • RECEIVE/TRANSMIT
-    • DONE
+> The SPI Slave uses CS- and SCLK-controlled sequential logic to perform transmit and receive operations during an active SPI transaction rather than using a separate FSM module.
 
 ---
 
@@ -330,10 +324,15 @@
 ![SPI Master FSM](docs/spi_master_fsm.png)
 
 ---
+🔧 SPI Master RTL Dataflow
 
-🔄 SPI Slave FSM
+![SPI Master Dataflow](docs/spi_master_dataflow.png)
 
-![SPI Slave FSM](docs/spi_slave_fsm.png)
+---
+
+🔧 SPI Slave RTL Dataflow
+
+![SPI Slave Dataflow](docs/spi_slave_dataflow.png)
 
 ---
 
@@ -357,18 +356,6 @@
 
 ---
 
-🔧 SPI Master RTL Dataflow
-
-![SPI Master Dataflow](docs/spi_master_dataflow.png)
-
----
-
-🔧 SPI Slave RTL Dataflow
-
-![SPI Slave Dataflow](docs/spi_slave_dataflow.png)
-
----
-
 🛠️ Skills Demonstrated
 
     • Verilog HDL
@@ -382,7 +369,7 @@
     • Functional Verification
     • Testbench Development
     • Waveform Analysis
-    • RTL/Dataflow Analysis
+    • RTL Analysis
     • Modular Hardware Design
     • ModelSim
     • GitHub
@@ -420,7 +407,7 @@
     • Testbench Development
     • Digital System Integration
     • Waveform Analysis
-    • RTL/Dataflow Verification
+    • RTL Verification
     • ModelSim-Based Verification
 
 ---
