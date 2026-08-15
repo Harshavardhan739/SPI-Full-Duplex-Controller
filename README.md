@@ -128,11 +128,7 @@
     • Reconstructs received parallel data
     • Maintains transfer bit count
 
-> The SPI Slave uses CS- and SCLK-controlled sequential logic.
-
-> To perform transmit and receive operations during an active.
-
-> SPI transaction, rather than using a separate FSM module.
+> The SPI Slave uses CS- and SCLK-controlled sequential logic to perform transmit and receive operations during an active SPI transaction rather than using a separate FSM module.
 
 ---
 
