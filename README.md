@@ -71,6 +71,8 @@
     📂 docs/ (Design Documentation and Diagrams) 
        🖼️ spi_block_diagram.png
        🖼️ spi_master_fsm.png
+       🖼️ spi_master_dataflow.png
+       🖼️ spi_slave_dataflow.png
     📂 waveforms/ (Simulation Waveform Logs)   
        🖼️ spi_master_waveform.png  
        🖼️ spi_slave_waveform.png
@@ -320,6 +322,17 @@
 🔄 SPI Master FSM
 
 ![SPI Master FSM](docs/spi_master_fsm.png)
+
+---
+🔧 SPI Master RTL Dataflow
+
+![SPI Master Dataflow](docs/spi_master_dataflow.png)
+
+---
+
+🔧 SPI Slave RTL Dataflow
+
+![SPI Slave Dataflow](docs/spi_slave_dataflow.png)
 
 ---
 
