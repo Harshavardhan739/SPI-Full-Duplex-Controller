@@ -48,7 +48,7 @@
     • Dedicated Master and Slave Testbenches
     • Top-Level System Integration
     • ModelSim Waveform Verification
-    • RTL Verification
+    • RTL/Dataflow Verification
 
 ---
 
@@ -369,7 +369,7 @@
     • Functional Verification
     • Testbench Development
     • Waveform Analysis
-    • RTL Analysis
+    • RTL/Dataflow Analysis
     • Modular Hardware Design
     • ModelSim
     • GitHub
@@ -407,7 +407,7 @@
     • Testbench Development
     • Digital System Integration
     • Waveform Analysis
-    • RTL Verification
+    • RTL/Dataflow Verification
     • ModelSim-Based Verification
 
 ---
